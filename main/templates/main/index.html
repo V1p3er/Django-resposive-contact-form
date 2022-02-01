@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{% static 'main/main.css' %}">
+	<meta charset="UTF-8">
+	<title>contact form</title>
+	<script>
+	if(document.location.search.match(/type=embed/gi)) {
+		window.parent.postMessage("resize", "*");
+	}
+	window.console = window.console || function(t) {};
+	</script>
+</head>
+
+<body translate="no">
+
+	<h1>Responsive Working Contact Form Using <b>Django</b></h1>
+
+	<!-- If user sended message show this message to him -->
+
+	{% if cf_name %}
+		<h2 style="color:white; text-align: center;">Thanks {{cf_name}}</h2>
+		<p style="color:white; text-align: center;">I recieved your email and I respond shortly ...</p>
+		<br/><br/><br/><br/>
+	{% endif %}
+
+	<section class="contact-wrap">
+		<form action="{% url 'main' %}" class="contact-form" method="post" role="form">
+      {% csrf_token %} <!-- Django token to avoid form getting hacked and getting info from form -->
+			<div class="col-sm-6">
+				<div class="input-block">
+					<label for="">First Name</label>
+					<input type="text" class="form-control" style=" background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;" id="cf-name" name="cf-name" required=""> </div>
+			</div>
+			<div class="col-sm-6">
+				<div class="input-block">
+					<label for="">Last Name</label>
+					<input type="text" class="form-control" id="cf-lastname" name="cf-lastname" required=""> </div>
+			</div>
+			<div class="col-sm-12">
+				<div class="input-block">
+					<label for="">Email</label>
+					<input type="text" class="form-control" id="cf-email" name="cf-email" required=""> </div>
+			</div>
+			<div class="col-sm-12">
+				<div class="input-block">
+					<label for="">Subject</label>
+					<input type="text" class="form-control" id="cf-subject" name="cf-subject" required=""> </div>
+			</div>
+			<div class="col-sm-12">
+				<div class="input-block textarea">
+					<label for="">Your message</label>
+					<textarea rows="3" type="text" class="form-control" id="cf-text" name="cf-text" required=""></textarea>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<button class="square-button">Send</button>
+			</div>
+		</form>
+	</section>
+	<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-1b93190375e9ccc259df3a57c1abc0e64599724ae30d7ea4c6877eb615f89387.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script id="rendered-js">
+
+	//material contact form animation
+
+	$('.contact-form').find('.form-control').each(function() {
+		var targetItem = $(this).parent();
+		if($(this).val()) {
+			$(targetItem).find('label').css({
+				'top': '10px',
+				'fontSize': '14px'
+			});
+		}
+	});
+	$('.contact-form').find('.form-control').focus(function() {
+		$(this).parent('.input-block').addClass('focus');
+		$(this).parent().find('label').animate({
+			'top': '10px',
+			'fontSize': '14px'
+		}, 300);
+	});
+	$('.contact-form').find('.form-control').blur(function() {
+		if($(this).val().length == 0) {
+			$(this).parent('.input-block').removeClass('focus');
+			$(this).parent().find('label').animate({
+				'top': '25px',
+				'fontSize': '18px'
+			}, 300);
+		}
+	});
+
+	//removing message that show to user after sending info via contact form after x seconds.
+
+	setTimeout(function(){
+		if ($('#djmsg').length > 0) {
+			 $('#djmsg').remove();
+		}
+  	 }, 5000)
+
+	</script>
+</body>
+</html>
