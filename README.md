@@ -1,9 +1,5 @@
 
-<!-- PROJECT LOGO -->
-<br />
 <div align="center">
-
-
   <h3 align="center">Django-Contact-Form</h3>
 
   <p align="center">
@@ -12,9 +8,9 @@
     <br />
     <br />
     ·
-    <a href="#">Report Bug</a>
+    <a href="https://github.com/V1p3er/Django-resposive-contact-form/issues">Report Bug</a>
     ·
-    <a href="#">Request Feature</a>
+    <a href="https://github.com/V1p3er/Django-resposive-contact-form/pulls">Request Feature</a>
   </p>
 </div>
 
